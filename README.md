@@ -1,65 +1,90 @@
-Aqui está um modelo de README.md profissional, estruturado e informativo para o seu projeto de Deep Learning, baseado no conteúdo do seu notebook.
+# 🎩 Escrevendo como Lewis Carroll: Geração de Texto com LSTM
 
-🎩 Escrevendo como Lewis Carroll: Geração de Texto com LSTM
-Este projeto utiliza Redes Neurais Recorrentes (RNN), especificamente a arquitetura Long Short-Term Memory (LSTM), para aprender o estilo literário de Lewis Carroll e gerar novos textos baseados na obra clássica "Alice no País das Maravilhas".
+Este projeto utiliza **Redes Neurais Recorrentes (RNN)**, especificamente a arquitetura **Long Short-Term Memory (LSTM)**, para aprender o estilo literário de **Lewis Carroll** e gerar novos textos inspirados na obra clássica **_Alice no País das Maravilhas_**.
 
-📖 Visão Geral
-O objetivo é criar um modelo de predição de caractere por caractere. Ao ser alimentado com uma sequência de texto, o modelo tenta prever qual será o próximo caractere mais provável, permitindo a geração de parágrafos inteiros que mimetizam o vocabulário e a estrutura do autor original.
+---
 
-🛠️ Tecnologias Utilizadas
-Python 3
+## 📖 Visão Geral
 
-TensorFlow / Keras: Para construção e treinamento da rede neural.
+O objetivo é criar um modelo de **predição caractere por caractere**.  
+Dada uma sequência de texto, o modelo aprende a prever o próximo caractere mais provável, possibilitando a geração de parágrafos inteiros que mimetizam o vocabulário, a estrutura sintática e o ritmo narrativo do autor original.
 
-Numpy & Pandas: Para manipulação de dados.
+---
 
-Google Colab: Ambiente de desenvolvimento.
+## 🛠️ Tecnologias Utilizadas
 
-🏗️ Arquitetura do Modelo
-O modelo foi construído utilizando a API funcional do Keras e consiste em três camadas principais:
+- **Python 3**
+- **TensorFlow / Keras** — construção e treinamento da rede neural
+- **NumPy & Pandas** — manipulação e preparação dos dados
+- **Google Colab** — ambiente de desenvolvimento e execução
 
-Embedding: Camada de entrada que mapeia os IDs dos caracteres em vetores densos.
+---
 
-LSTM: Camada com 1024 unidades, responsável por aprender as dependências de longo prazo na sequência do texto.
+## 🏗️ Arquitetura do Modelo
 
-Dense: Camada de saída que converte a representação da rede de volta para o tamanho do vocabulário (logits).
+O modelo foi implementado utilizando a **API Funcional do Keras** e é composto por três camadas principais:
 
-🚀 Fluxo de Trabalho
-1. Pré-processamento
-Vetorização: O texto original foi convertido em IDs numéricos usando tf.keras.layers.StringLookup.
+1. **Embedding**  
+   Camada de entrada responsável por mapear os IDs dos caracteres em vetores densos.
 
-Criação de Sequências: O dataset foi dividido em janelas de texto de 100 caracteres para treinamento.
+2. **LSTM**  
+   Camada recorrente com **1024 unidades**, encarregada de aprender dependências de longo prazo na sequência textual.
 
-Batching: Os dados foram organizados em lotes (batches) de 64 sequências, com shuffle e prefetch para otimização de performance.
+3. **Dense**  
+   Camada de saída que projeta a representação aprendida para o tamanho do vocabulário (logits).
 
-2. Treinamento
-Loss Function: SparseCategoricalCrossentropy (partindo de logits).
+---
 
-Otimizador: Adam.
+## 🚀 Fluxo de Trabalho
 
-Épocas: O modelo foi treinado por 20 épocas.
+### 1. Pré-processamento
 
-Checkpoints: Pesos salvos durante o processo para permitir a retomada ou inferência posterior.
+- **Vetorização**  
+  Conversão do texto original em IDs numéricos utilizando `tf.keras.layers.StringLookup`.
 
-3. Geração de Texto
-Para a geração, utilizamos uma técnica de amostragem com Temperatura.
+- **Criação de Sequências**  
+  O texto foi segmentado em janelas deslizantes de **100 caracteres** para treinamento supervisionado.
 
-Uma temperatura alta resulta em textos mais criativos/caóticos.
+- **Batching**  
+  Organização dos dados em batches de **64 sequências**, com *shuffle* e *prefetch* para otimização de desempenho.
 
-Uma temperatura baixa resulta em textos mais conservadores e repetitivos.
+---
 
-📊 Resultados
-Após o treinamento, o modelo foi capaz de gerar fragmentos que incluem diálogos estruturados e nomes de personagens como "Alice", "The King" e "The Queen", respeitando a pontuação e quebras de linha típicas do livro.
+### 2. Treinamento
 
-Exemplo de saída:
+- **Função de Perda (Loss Function)**  
+  `SparseCategoricalCrossentropy` (a partir de logits).
 
-Alice: 'Oh! What I'd non. wet tast is be ding one boling and retting or any--and itself so you filling thome...
+- **Otimizador**  
+  `Adam`.
 
-⚙️ Como Executar
-Certifique-se de ter o arquivo wonderland.txt no diretório especificado.
+- **Épocas**  
+  Treinamento realizado por **20 épocas**.
 
-Instale o TensorFlow: pip install tensorflow
+- **Checkpoints**  
+  Salvamento automático dos pesos do modelo para retomada do treinamento ou inferência posterior.
 
-Execute as células do notebook para treinar o modelo.
+---
 
-Utilize a classe OneStep para gerar seus próprios "novos capítulos".
+### 3. Geração de Texto
+
+A geração de texto é realizada por meio de **amostragem com Temperatura**:
+
+- **Temperatura alta** → textos mais criativos e imprevisíveis  
+- **Temperatura baixa** → textos mais conservadores e repetitivos
+
+---
+
+## 📊 Resultados
+
+Após o treinamento, o modelo foi capaz de gerar fragmentos textuais contendo:
+
+- Diálogos estruturados  
+- Nomes de personagens como *Alice*, *The King* e *The Queen*  
+- Uso consistente de pontuação e quebras de linha características da obra original  
+
+**Exemplo de saída:**
+
+```text
+Alice: 'Oh! What I'd non. wet tast is be ding one boling
+and retting or any--and itself so you filling thome...
